@@ -123,16 +123,50 @@ document.addEventListener('DOMContentLoaded', () => {
     // Aqui entraria a integração real (ex.: envio para um endpoint, EmailJS, etc.)
     // Por enquanto, simula o envio para fins de demonstração do site.
     const submitBtn = form.querySelector('.form-submit');
-    submitBtn.disabled = true;
-    submitBtn.textContent = 'Enviando...';
 
-    setTimeout(() => {
-      formStatus.textContent = 'Solicitação enviada! Entraremos em contato em breve.';
-      formStatus.className = 'form-status success';
-      form.reset();
-      submitBtn.disabled = false;
-      submitBtn.textContent = 'Enviar solicitação';
-    }, 900);
+submitBtn.disabled = true;
+submitBtn.textContent = 'Enviando...';
+
+fetch('enviar.php', {
+    method: 'POST',
+    body: new FormData(form)
+})
+.then(response => response.json())
+.then(data => {
+
+    if(data.success){
+
+        formStatus.textContent =
+        'Solicitação enviada! Entraremos em contato em breve.';
+
+        formStatus.className = 'form-status success';
+
+        form.reset();
+
+    }else{
+
+        formStatus.textContent =
+        data.message;
+
+        formStatus.className = 'form-status error';
+
+    }
+
+})
+.catch(() => {
+
+    formStatus.textContent =
+    'Erro ao enviar a solicitação.';
+
+    formStatus.className = 'form-status error';
+
+})
+.finally(() => {
+
+    submitBtn.disabled = false;
+    submitBtn.textContent = 'Enviar solicitação';
+
+});
   });
 
 });
