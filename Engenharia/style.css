@@ -144,6 +144,7 @@ h1, h2, h3 {
   background: var(--terracota);
   color: var(--branco);
   box-shadow: 0 4px 0 0 var(--terracota-dark);
+  border-radius: 40px;
 }
 
 .btn-primary:hover {
@@ -155,6 +156,7 @@ h1, h2, h3 {
   background: transparent;
   color: var(--branco);
   border: 1.5px solid rgba(250,250,248,0.4);
+  border-radius: 40px;
 }
 
 .btn-ghost:hover {
@@ -174,9 +176,9 @@ h1, h2, h3 {
 }
 
 .site-header.scrolled {
-  background: rgba(21, 24, 26, 0.92);
+  background: rgba(70, 70, 70, 0.363);
   backdrop-filter: blur(10px);
-  box-shadow: 0 1px 0 rgba(255,255,255,0.06);
+  box-shadow: 0 1px 0 rgba(70, 70, 70, 0.219);
 }
 
 .header-inner {
@@ -186,6 +188,7 @@ h1, h2, h3 {
   height: 84px;
 }
 
+/*
 .brand {
   display: flex;
   align-items: center;
@@ -193,8 +196,8 @@ h1, h2, h3 {
 }
 
 .brand-mark {
-  width: 42px;
-  height: 42px;
+  width: 45px;
+  height: 45px;
   display: grid;
   place-items: center;
   background: var(--terracota);
@@ -205,6 +208,30 @@ h1, h2, h3 {
   border-radius: 4px;
   flex-shrink: 0;
 }
+*/
+
+.brand {
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
+.brand-logo {
+  height: 45px; 
+  margin: 15px;      /* Controla a altura perfeita da logo no cabeçalho */
+  width: auto;         /* Mantém a proporção da imagem sem achatar */
+  display: block;
+  transition: transform var(--transition);
+  
+  /* Se a sua imagem original tiver fundo branco e você quiser deixá-la 
+     totalmente transparente para misturar com o fundo escuro do cabeçalho: */
+  mix-blend-mode: multiply; 
+}
+
+.brand-logo:hover {
+  transform: scale(1.03); /* Efeito sutil ao passar o mouse */
+}
+
 
 .brand-text {
   display: flex;
@@ -214,7 +241,7 @@ h1, h2, h3 {
 
 .brand-text strong {
   font-family: var(--font-display);
-  font-size: 1.05rem;
+  font-size: 1.20rem;
   letter-spacing: 0.04em;
   color: var(--branco);
 }
@@ -236,7 +263,7 @@ h1, h2, h3 {
   font-weight: 500;
   color: var(--texto-claro);
   position: relative;
-  padding: 6px 0;
+  padding: 6px 1;
 }
 
 .main-nav a:not(.nav-cta)::after {
@@ -255,7 +282,7 @@ h1, h2, h3 {
   background: var(--terracota);
   color: var(--branco) !important;
   padding: 10px 20px;
-  border-radius: var(--radius);
+  border-radius: 30px;
   font-weight: 600;
 }
 
@@ -561,6 +588,39 @@ h1, h2, h3 {
 }
 
 /* ============ PROJETOS ============ */
+
+.portfolio-filters {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 40px;
+  flex-wrap: wrap;
+}
+
+.filter-btn {
+  background: var(--concreto-100);
+  color: var(--grafite-700);
+  padding: 10px 20px;
+  font-size: 0.88rem;
+  font-family: var(--font-heading);
+  font-weight: 600;
+  border-radius: var(--radius);
+  transition: background var(--transition), color var(--transition);
+}
+
+.filter-btn:hover, .filter-btn.active {
+  background: var(--terracota);
+  color: var(--branco);
+}
+
+/* Transição suave ao ocultar/exibir itens */
+.projeto-item {
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.projeto-item.hide {
+  display: none;
+}
 
 .projetos {
   padding: 110px 0;
@@ -925,7 +985,8 @@ h1, h2, h3 {
 [data-reveal] {
   opacity: 0;
   transform: translateY(24px);
-  transition: opacity 700ms cubic-bezier(.2,.6,.2,1), transform 700ms cubic-bezier(.2,.6,.2,1);
+  transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), 
+              transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 [data-reveal].in-view {
@@ -1023,3 +1084,22 @@ h1, h2, h3 {
 .img-projeto8 { background-image: url('assets/projeto8.png'); background-size: cover; background-position: center; }
 
 .projeto-media::before { content: none; } /* remove a etiqueta "FOTO" */
+
+
+/*Desenvolvedor*/
+
+.developer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px; /* espaço entre a imagem e o texto */
+    color: #fff;
+    font-size: 12px;
+  padding: 22px 28px;
+}
+
+.developer img {
+    width: 30px;   /* ajuste conforme necessário */
+    height: auto;
+    border-radius: 5px;
+}
