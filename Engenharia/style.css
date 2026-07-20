@@ -1086,9 +1086,9 @@ h1, h2, h3 {
 .img-projeto10 { background-image: url('assets/projeto10.png'); background-size: cover; background-position: center; }
 .img-projeto11 { background-image: url('assets/projeto11.png'); background-size: cover; background-position: center; }
 .img-projeto12 { background-image: url('assets/projeto12.png'); background-size: cover; background-position: center; }
-.img-projeto13{ background-image: url('assets/projeto12.png'); background-size: cover; background-position: center; }
-.img-projeto14{ background-image: url('assets/projeto12.png'); background-size: cover; background-position: center; }
-.img-projeto15{ background-image: url('assets/projeto12.png'); background-size: cover; background-position: center; }
+.img-praca{ background-image: url('assets/praca.png'); background-size: cover; background-position: center; }
+.img-praca1{ background-image: url('assets/praca1.png'); background-size: cover; background-position: center; }
+.img-praca2{ background-image: url('assets/praca2.png'); background-size: cover; background-position: center; }
 
 .projeto-media::before { content: none; } /* remove a etiqueta "FOTO" */
 
