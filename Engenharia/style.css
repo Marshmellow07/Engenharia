@@ -1082,6 +1082,10 @@ h1, h2, h3 {
 .img-projeto5 { background-image: url('assets/projeto5.png'); background-size: cover; background-position: center; }
 .img-projeto6 { background-image: url('assets/projeto6.png'); background-size: cover; background-position: center; }
 .img-projeto8 { background-image: url('assets/projeto8.png'); background-size: cover; background-position: center; }
+.img-projeto9 { background-image: url('assets/projeto9.png'); background-size: cover; background-position: center; }
+.img-projeto10 { background-image: url('assets/projeto10.png'); background-size: cover; background-position: center; }
+.img-projeto11 { background-image: url('assets/projeto11.png'); background-size: cover; background-position: center; }
+.img-projeto12 { background-image: url('assets/projeto12.png'); background-size: cover; background-position: center; }
 
 .projeto-media::before { content: none; } /* remove a etiqueta "FOTO" */
 

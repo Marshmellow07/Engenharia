@@ -21,31 +21,35 @@ document.addEventListener('DOMContentLoaded', () => {
   const navToggle = document.getElementById('navToggle');
   const mainNav = document.getElementById('mainNav');
 
-  navToggle.addEventListener('click', () => {
-    const isOpen = mainNav.classList.toggle('open');
-    navToggle.classList.toggle('open', isOpen);
-    navToggle.setAttribute('aria-expanded', String(isOpen));
-  });
-
-  mainNav.querySelectorAll('a').forEach(link => {
-    link.addEventListener('click', () => {
-      mainNav.classList.remove('open');
-      navToggle.classList.remove('open');
-      navToggle.setAttribute('aria-expanded', 'false');
+  if (navToggle && mainNav) {
+    navToggle.addEventListener('click', () => {
+      const isOpen = mainNav.classList.toggle('open');
+      navToggle.classList.toggle('open', isOpen);
+      navToggle.setAttribute('aria-expanded', String(isOpen));
     });
-  });
+
+    mainNav.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        mainNav.classList.remove('open');
+        navToggle.classList.remove('open');
+        navToggle.setAttribute('aria-expanded', 'false');
+      });
+    });
+  }
 
   /* ----------- botão voltar ao topo ----------- */
   const backToTop = document.getElementById('backToTop');
-  const onScrollTop = () => {
-    backToTop.classList.toggle('visible', window.scrollY > 500);
-  };
-  onScrollTop();
-  window.addEventListener('scroll', onScrollTop, { passive: true });
+  if (backToTop) {
+    const onScrollTop = () => {
+      backToTop.classList.toggle('visible', window.scrollY > 500);
+    };
+    onScrollTop();
+    window.addEventListener('scroll', onScrollTop, { passive: true });
 
-  backToTop.addEventListener('click', () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  });
+    backToTop.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  }
 
   /* ----------- scroll reveal (otimizado) ----------- */
   const revealTargets = document.querySelectorAll(
@@ -57,14 +61,13 @@ document.addEventListener('DOMContentLoaded', () => {
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   if (!prefersReducedMotion && 'IntersectionObserver' in window) {
-    let revealedCount = 0; // Contador global para criar o delay sequencial perfeito
+    let revealedCount = 0;
 
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
           const target = entry.target;
           
-          // Aplica o delay sequencial apenas aos elementos que aparecem juntos
           setTimeout(() => {
             target.classList.add('in-view');
           }, revealedCount * 60);
@@ -74,7 +77,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       });
 
-      // Reseta o contador de delay após o lote de elementos visíveis ser processado
       setTimeout(() => { revealedCount = 0; }, 100);
     }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
 
@@ -92,90 +94,131 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  /* ----------- validação do formulário de contato ----------- */
+  /* ----------- validação e envio real para Formspree ----------- */
   const form = document.getElementById('contatoForm');
   const formStatus = document.getElementById('formStatus');
 
-  const validators = {
-    nome: (v) => v.trim().split(/\s+/).length >= 2 && v.trim().length >= 6 
-      ? '' 
-      : 'Informe seu nome e sobrenome.',
-    telefone: (v) => v.replace(/\D/g, '').length >= 10 
-      ? '' 
-      : 'Informe um número com DDD (ex: 14 99999-9999).',
-    email: (v) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim()) 
-      ? '' 
-      : 'Informe um e-mail válido.',
-    tipo: (v) => v 
-      ? '' 
-      : 'Selecione o tipo de obra.'
-  };
+  if (form) {
+    const validators = {
+      nome: (v) => v.trim().split(/\s+/).length >= 2 && v.trim().length >= 6 
+        ? '' 
+        : 'Informe seu nome e sobrenome.',
+      telefone: (v) => v.replace(/\D/g, '').length >= 10 
+        ? '' 
+        : 'Informe um número com DDD (ex: 14 99999-9999).',
+      email: (v) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim()) 
+        ? '' 
+        : 'Informe um e-mail válido.',
+      tipo: (v) => v 
+        ? '' 
+        : 'Selecione o tipo de obra.'
+    };
 
-  function showFieldError(field, message) {
-    const input = form.elements[field];
-    const errorEl = form.querySelector(`.form-error[data-for="${field}"]`);
-    if (message) {
-      input.classList.add('invalid');
-      input.setAttribute('aria-invalid', 'true');
-      if (errorEl) errorEl.textContent = message;
-    } else {
-      input.classList.remove('invalid');
-      input.removeAttribute('aria-invalid');
-      if (errorEl) errorEl.textContent = '';
-    }
-  }
-
-  // Validação dinâmica: blur para ativar o erro, input para corrigir em tempo real
-  Object.keys(validators).forEach(field => {
-    const input = form.elements[field];
-    if (!input) return;
-
-    let hasBeenBlurred = false;
-
-    input.addEventListener('blur', () => {
-      hasBeenBlurred = true;
-      showFieldError(field, validators[field](input.value));
-    });
-
-    input.addEventListener('input', () => {
-      // Se o usuário já saiu do campo uma vez e gerou erro, valida em tempo real enquanto ele digita
-      if (hasBeenBlurred || input.classList.contains('invalid')) {
-        showFieldError(field, validators[field](input.value));
+    function showFieldError(field, message) {
+      const input = form.elements[field];
+      const errorEl = form.querySelector(`.form-error[data-for="${field}"]`);
+      if (input) {
+        if (message) {
+          input.classList.add('invalid');
+          input.setAttribute('aria-invalid', 'true');
+          if (errorEl) errorEl.textContent = message;
+        } else {
+          input.classList.remove('invalid');
+          input.removeAttribute('aria-invalid');
+          if (errorEl) errorEl.textContent = '';
+        }
       }
-    });
-  });
+    }
 
-  form.addEventListener('submit', (e) => {
-    e.preventDefault();
-
-    let hasError = false;
+    // Validação dinâmica ao digitar/sair do campo
     Object.keys(validators).forEach(field => {
       const input = form.elements[field];
-      const message = validators[field](input.value);
-      showFieldError(field, message);
-      if (message) hasError = true;
+      if (!input) return;
+
+      let hasBeenBlurred = false;
+
+      input.addEventListener('blur', () => {
+        hasBeenBlurred = true;
+        showFieldError(field, validators[field](input.value));
+      });
+
+      input.addEventListener('input', () => {
+        if (hasBeenBlurred || input.classList.contains('invalid')) {
+          showFieldError(field, validators[field](input.value));
+        }
+      });
     });
 
-    if (hasError) {
-      formStatus.textContent = 'Verifique os campos destacados antes de enviar.';
-      formStatus.className = 'form-status error';
-      return;
-    }
+    // Envio REAL do formulário via AJAX para o Formspree
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
 
-    const submitBtn = form.querySelector('.form-submit');
-    submitBtn.disabled = true;
-    const originalBtnText = submitBtn.textContent;
-    submitBtn.textContent = 'Enviando...';
+      let hasError = false;
+      Object.keys(validators).forEach(field => {
+        const input = form.elements[field];
+        if (input) {
+          const message = validators[field](input.value);
+          showFieldError(field, message);
+          if (message) hasError = true;
+        }
+      });
 
-    // Simulação do envio real
-    setTimeout(() => {
-      formStatus.textContent = 'Solicitação enviada! Entraremos em contato em breve.';
-      formStatus.className = 'form-status success';
-      form.reset();
-      submitBtn.disabled = false;
-      submitBtn.textContent = originalBtnText;
-    }, 1200);
-  });
+      if (hasError) {
+        if (formStatus) {
+          formStatus.textContent = 'Verifique os campos destacados antes de enviar.';
+          formStatus.className = 'form-status error';
+        }
+        return;
+      }
+
+      const submitBtn = form.querySelector('.form-submit');
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        var originalBtnText = submitBtn.textContent;
+        submitBtn.textContent = 'Enviando...';
+      }
+
+      if (formStatus) {
+        formStatus.textContent = '';
+        formStatus.className = 'form-status';
+      }
+
+      const formData = new FormData(form);
+
+      try {
+        const response = await fetch(form.action, {
+          method: form.method,
+          body: formData,
+          headers: {
+            'Accept': 'application/json'
+          }
+        });
+
+        if (response.ok) {
+          if (formStatus) {
+            formStatus.textContent = 'Solicitação enviada! Entraremos em contato em breve.';
+            formStatus.className = 'form-status success';
+          }
+          form.reset();
+        } else {
+          if (formStatus) {
+            formStatus.textContent = 'Ops! Houve um problema no envio. Tente novamente.';
+            formStatus.className = 'form-status error';
+          }
+        }
+      } catch (error) {
+        if (formStatus) {
+          formStatus.textContent = 'Erro de conexão. Verifique sua internet.';
+          formStatus.className = 'form-status error';
+        }
+      } finally {
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.textContent = originalBtnText;
+        }
+      }
+    });
+  }
 
   /* ----------- filtro do portfólio ----------- */
   const filterBtns = document.querySelectorAll('.filter-btn');
@@ -183,7 +226,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
   filterBtns.forEach(btn => {
     btn.addEventListener('click', () => {
-      // Altera classe ativa do botão
       filterBtns.forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
 
@@ -194,7 +236,6 @@ document.addEventListener('DOMContentLoaded', () => {
         
         if (filterValue === 'all' || category === filterValue) {
           projeto.classList.remove('hide');
-          // Pequena animação de fade-in ao reexibir
           setTimeout(() => {
             projeto.style.opacity = '1';
             projeto.style.transform = 'scale(1)';
@@ -202,7 +243,6 @@ document.addEventListener('DOMContentLoaded', () => {
         } else {
           projeto.style.opacity = '0';
           projeto.style.transform = 'scale(0.95)';
-          // Aguarda a transição de fade antes de dar display: none
           setTimeout(() => {
             projeto.classList.add('hide');
           }, 300);

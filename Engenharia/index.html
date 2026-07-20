@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Fadoni Engenharia e Construtora | Engenharia Civil de Precisão</title>
-<meta name="description" content="Fadoni Engenharia & Construções LTDA — projetos, construção e gestão de obras com precisão técnica e compromisso de prazo.">
+<meta name="description" content="Fadoni Engenharia e Construtora LTDA — projetos, construção e gestão de obras com precisão técnica e compromisso de prazo.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=Archivo+Expanded:wght@700;800&family=Inter:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
@@ -119,7 +119,7 @@
 
         </p>
         <p>
-          Atendemos empreendimentos de médio a grande porte, desenvolvendo de forma integrada todos os tipos de projetos civis, 
+          Atendemos empreendimentos de médio a grande porte, desenvolvendo de forma integrada todo o tipo de projeto civil, 
           elétricos e complementares. Garantimos previsibilidade e controle em todas as etapas por meio de cronogramas detalhados, 
           relatórios técnicos formais e total conformidade com as especificações descritivas
         </p>
@@ -207,6 +207,7 @@
         <button class="filter-btn active" data-filter="all">Todos os Projetos</button>
         <button class="filter-btn" data-filter="residencial">Residenciais</button>
         <button class="filter-btn" data-filter="comercial">Comerciais</button>
+        <button class="filter-btn" data-filter="way">Way</button>
     </div>
 
       <div class="projetos-grid" id="projetosGrid">
@@ -263,6 +264,43 @@
             <h3>Empreendimento vertical — vista aérea da entrega</h3>
           </figcaption>
         </figure>
+
+        <!-- PLACEHOLDER: projeto9.png -->
+        <figure class="projeto-item" data-cat="way">
+          <div class="projeto-media img-projeto9"></div>
+          <figcaption>
+            <span class="projeto-tag">Way</span>
+            <h3>Base de atendimento ao usuário — estruturas modulares e acabamento</h3>
+          </figcaption>
+        </figure>
+
+        <!-- PLACEHOLDER: projeto10.png -->
+        <figure class="projeto-item" data-cat="way">
+          <div class="projeto-media img-projeto10"></div>
+          <figcaption>
+            <span class="projeto-tag">Way</span>
+            <h3>Base de atendimento ao usuário — vista frontal e pátio operacional </h3>
+          </figcaption>
+        </figure>
+
+        <!-- PLACEHOLDER: projeto11.png -->
+        <figure class="projeto-item" data-cat="way">
+          <div class="projeto-media img-projeto11"></div>
+          <figcaption>
+            <span class="projeto-tag">Way</span>
+            <h3>Base de atendimento ao usuário — vista aérea da implantação na rodovia</h3>
+          </figcaption>
+        </figure>
+
+        <!-- PLACEHOLDER: projeto12.png -->
+        <figure class="projeto-item" data-cat="way">
+          <div class="projeto-media img-projeto12"></div>
+          <figcaption>
+            <span class="projeto-tag">Way</span>
+            <h3>Base de atendimento ao usuário — implantação e suporte operacional </h3>
+          </figcaption>
+        </figure>
+
       </div>
     </div>
   </section>
@@ -325,75 +363,76 @@
   </section>
 
   <!-- ============ CONTATO ============ -->
-  <section class="contato" id="contato">
-    <div class="wrap contato-grid">
-      <div class="contato-info">
-        <span class="eyebrow">Contato</span>
-        <h2>Vamos planejar sua obra.</h2>
-        <p>Responda algumas perguntas rápidas e retornamos com um orçamento inicial.</p>
+<section class="contato" id="contato">
+  <div class="wrap contato-grid">
+    <div class="contato-info">
+      <span class="eyebrow">Contato</span>
+      <h2>Vamos planejar sua obra.</h2>
+      <p>Responda algumas perguntas rápidas e retornamos com um orçamento inicial.</p>
 
-        <ul class="contato-list">
-          <li>
-            <strong>Telefone / WhatsApp</strong>
-            <span>(14) 0000-0000</span>
-          </li>
-          <li>
-            <strong>E-mail</strong>
-            <span>adm@fadoniconstrutora.com.br</span>
-          </li>
-          <li>
-            <strong>Atendimento</strong>
-            <span>Segunda a sexta, 8h às 17h</span>
-          </li>
-          <li>
-            <strong>Região de atuação</strong>
-            <span>Macatuba e região</span>
-          </li>
-        </ul>
+      <ul class="contato-list">
+        <li>
+          <strong>Telefone / WhatsApp</strong>
+          <span>(14) 0000-0000</span>
+        </li>
+        <li>
+          <strong>E-mail</strong>
+          <span>adm@fadoniconstrutora.com.br</span>
+        </li>
+        <li>
+          <strong>Atendimento</strong>
+          <span>Segunda a sexta, 8h às 17h</span>
+        </li>
+        <li>
+          <strong>Região de atuação</strong>
+          <span>Macatuba e região</span>
+        </li>
+      </ul>
+    </div>
+
+    <!-- O formulário agora possui o action e method configurados para o Formspree -->
+    <form class="contato-form" id="contatoForm" action="https://formspree.io/f/mqerpjoq" method="POST" novalidate>
+      <div class="form-row">
+        <label for="nome">Nome completo</label>
+        <input type="text" id="nome" name="nome" required placeholder="Seu nome">
+        <span class="form-error" data-for="nome"></span>
       </div>
 
-      <form class="contato-form" id="contatoForm" novalidate>
-        <div class="form-row">
-          <label for="nome">Nome completo</label>
-          <input type="text" id="nome" name="nome" required placeholder="Seu nome">
-          <span class="form-error" data-for="nome"></span>
-        </div>
+      <div class="form-row">
+        <label for="telefone">Telefone / WhatsApp</label>
+        <input type="tel" id="telefone" name="telefone" required placeholder="(14) 90000-0000">
+        <span class="form-error" data-for="telefone"></span>
+      </div>
 
-        <div class="form-row">
-          <label for="telefone">Telefone / WhatsApp</label>
-          <input type="tel" id="telefone" name="telefone" required placeholder="(14) 90000-0000">
-          <span class="form-error" data-for="telefone"></span>
-        </div>
+      <div class="form-row">
+        <label for="email">E-mail</label>
+        <input type="email" id="email" name="email" required placeholder="voce@email.com">
+        <span class="form-error" data-for="email"></span>
+      </div>
 
-        <div class="form-row">
-          <label for="email">E-mail</label>
-          <input type="email" id="email" name="email" required placeholder="voce@email.com">
-          <span class="form-error" data-for="email"></span>
-        </div>
+      <div class="form-row">
+        <label for="tipo">Tipo de obra</label>
+        <select id="tipo" name="tipo" required>
+          <option value="" disabled selected>Selecione uma opção</option>
+          <option value="Construção residencial nova">Construção residencial nova</option>
+          <option value="Construção comercial nova">Construção comercial nova</option>
+          <option value="Reforma / ampliação">Reforma / ampliação</option>
+          <option value="Apenas projeto e cálculo">Apenas projeto e cálculo</option>
+          <option value="Gestão / fiscalização de obra">Gestão / fiscalização de obra</option>
+        </select>
+        <span class="form-error" data-for="tipo"></span>
+      </div>
 
-        <div class="form-row">
-          <label for="tipo">Tipo de obra</label>
-          <select id="tipo" name="tipo" required>
-            <option value="" disabled selected>Selecione uma opção</option>
-            <option value="residencial-novo">Construção residencial nova</option>
-            <option value="comercial-novo">Construção comercial nova</option>
-            <option value="reforma">Reforma / ampliação</option>
-            <option value="projeto">Apenas projeto e cálculo</option>
-            <option value="fiscalizacao">Gestão / fiscalização de obra</option>
-          </select>
-          <span class="form-error" data-for="tipo"></span>
-        </div>
+      <div class="form-row form-row-full">
+        <label for="mensagem">Conte um pouco sobre a obra</label>
+        <textarea id="mensagem" name="mensagem" rows="4" placeholder="Local, metragem aproximada, prazo desejado..."></textarea>
+      </div>
 
-        <div class="form-row form-row-full">
-          <label for="mensagem">Conte um pouco sobre a obra</label>
-          <textarea id="mensagem" name="mensagem" rows="4" placeholder="Local, metragem aproximada, prazo desejado..."></textarea>
-        </div>
-
-        <button type="submit" class="btn btn-primary form-submit">Enviar solicitação</button>
-        <p class="form-status" id="formStatus" role="status" aria-live="polite"></p>
-      </form>
-    </div>
-  </section>
+      <button type="submit" class="btn btn-primary form-submit">Enviar solicitação</button>
+      <p class="form-status" id="formStatus" role="status" aria-live="polite"></p>
+    </form>
+  </div>
+</section>
 
 </main>
 
