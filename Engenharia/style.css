@@ -232,6 +232,17 @@ h1, h2, h3 {
   transform: scale(1.03); /* Efeito sutil ao passar o mouse */
 }
 
+.brand-mark {
+  width: 45px;
+  height: 45px;
+  display: grid;
+  place-items: center;
+  font-weight: 800;
+  font-size: 1.3rem;
+  border-radius: 4px;
+  flex-shrink: 0;
+}
+
 
 .brand-text {
   display: flex;
